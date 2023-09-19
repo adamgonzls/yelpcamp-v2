@@ -28,6 +28,13 @@ app.get('/campgrounds', async (req, res) => {
   res.render('campgrounds/index', { campgrounds })
 })
 
+app.get('/campgrounds/:id', async (req, res) => {
+  const { id } = req.params
+  const campground = await Campground.findById(id)
+  console.log(campground)
+  res.render('campgrounds/details', { campground })
+})
+
 // app.get('/makecampground', async (req, res) => {
 //   const camp = new Campground({
 //     name: 'Old Timers Ridge',

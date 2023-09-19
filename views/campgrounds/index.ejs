@@ -10,7 +10,10 @@
     <% if (campgrounds) { %>
     <ul>
       <% campgrounds.forEach(campground => { %>
-      <li><%= campground.name %></li>
+      <li>
+        <%= campground.name %>
+        <a href="campgrounds/<%= campground._id %>">Details</a>
+      </li>
       <% }) %>
     </ul>
     <% } %>

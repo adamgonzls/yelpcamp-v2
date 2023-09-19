@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campground Details</title>
+  </head>
+  <body>
+    <% if (campground) { %>
+    <h1><%= campground.name %></h1>
+    <span><%= campground.location %></span>
+    <p><%= campground.description %></p>
+    <span><%= campground.price %></span>
+    <% } %>
+  </body>
+</html>
