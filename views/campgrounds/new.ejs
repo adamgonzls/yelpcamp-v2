@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New campground</title>
+  </head>
+  <body>
+    <h1>Add a Campground</h1>
+    <form action="/campgrounds" method="POST">
+      <div>
+        <label for="name">Name:</label>
+        <input
+          id="name"
+          type="text"
+          placeholder="Red Rock Retreat"
+          name="campground[name]"
+          value=""
+        />
+      </div>
+      <div>
+        <label for="price">Price:</label>
+        <input
+          id="price"
+          type="text"
+          placeholder="150"
+          name="campground[price]"
+          value=""
+        />
+      </div>
+      <div>
+        <label for="location">Location:</label>
+        <input
+          id="location"
+          type="text"
+          placeholder="Sedona, Arizona"
+          name="campground[location]"
+          value=""
+        />
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <input
+          id="description"
+          type="text"
+          placeholder="The amazing rocks had me mesmerized..."
+          name="campground[description]"
+          value=""
+        />
+      </div>
+      <button>Add Campground</button>
+    </form>
+  </body>
+</html>

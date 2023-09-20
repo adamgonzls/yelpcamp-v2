@@ -11,7 +11,7 @@
     <ul>
       <% campgrounds.forEach(campground => { %>
       <li>
-        <%= campground.name %>
+        <%= campground.name %> <%= campground.location %>
         <a href="campgrounds/<%= campground._id %>">Details</a>
       </li>
       <% }) %>
