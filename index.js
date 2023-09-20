@@ -42,10 +42,28 @@ app.get('/campgrounds/:id', async (req, res) => {
   res.render('campgrounds/details', { campground })
 })
 
+app.get('/campgrounds/:id/edit', async (req, res) => {
+  const { id } = req.params
+  const campground = await Campground.findById(id)
+  res.render('campgrounds/edit', { campground })
+})
+
+app.put('/campgrounds/:id', async (req, res) => {
+  const campground = await Campground.findByIdAndUpdate(req.params.id, {
+    ...req.body.campground,
+  })
+  res.redirect(`/campgrounds/${campground._id}`)
+})
+
 app.post('/campgrounds', async (req, res) => {
   const newCampground = new Campground(req.body.campground)
   await newCampground.save()
   res.redirect(`/campgrounds/${newCampground._id}`)
+})
+
+app.delete('/campgrounds/:id', async (req, res) => {
+  await Campground.findByIdAndDelete(req.params.id)
+  res.redirect('/campgrounds')
 })
 
 app.listen(PORT, () => {
