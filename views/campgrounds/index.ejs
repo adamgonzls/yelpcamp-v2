@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Campgrounds</title>
-  </head>
-  <body>
-    <h1>All campgrounds</h1>
-    <% if (campgrounds) { %>
-    <ul>
-      <% campgrounds.forEach(campground => { %>
-      <li>
-        <%= campground.name %> <%= campground.location %>
-        <a href="campgrounds/<%= campground._id %>">Details</a>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
-  </body>
-</html>
+<% layout('layouts/boilerplate') %>
+
+<h1>All campgrounds</h1>
+<a href="/campgrounds/new">Add a campground</a>
+<% if (campgrounds) { %>
+<ul>
+  <% campgrounds.forEach(campground => { %>
+  <li>
+    <%= campground.name %> <%= campground.location %>
+    <a href="campgrounds/<%= campground._id %>">Details</a>
+  </li>
+  <% }) %>
+</ul>
+<% } %>
