@@ -2,8 +2,10 @@
 <html lang="en">
   <%- include('../partials/head') %>
   <body>
-    <%- include('../partials/navbar') %>
-    <main><%- body %></main>
-    <%# include('../partials/footer') %>
+    <div class="page-container vh-100 d-flex flex-column">
+      <%- include('../partials/navbar') %>
+      <main class="container mt-5"><%- body %></main>
+      <%- include('../partials/footer') %>
+    </div>
   </body>
 </html>

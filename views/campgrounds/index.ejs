@@ -3,7 +3,7 @@
 <h1>All campgrounds</h1>
 <a href="/campgrounds/new">Add a campground</a>
 <% if (campgrounds) { %>
-<ul>
+<ul class="list-unstyled">
   <% campgrounds.forEach(campground => { %>
   <li>
     <%= campground.name %> <%= campground.location %>
