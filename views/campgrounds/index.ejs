@@ -2,13 +2,29 @@
 
 <h1>All campgrounds</h1>
 <a href="/campgrounds/new">Add a campground</a>
-<% if (campgrounds) { %>
-<ul class="list-unstyled">
-  <% campgrounds.forEach(campground => { %>
-  <li>
-    <%= campground.name %> <%= campground.location %>
-    <a href="campgrounds/<%= campground._id %>">Details</a>
-  </li>
-  <% }) %>
-</ul>
-<% } %>
+<% if (campgrounds) { %> <% campgrounds.forEach(campground => { %>
+<div class="card mt-3">
+  <div class="row">
+    <div class="col-md-4">
+      <img
+        class="property__image object-fit-cover"
+        src="<%= campground.image %>"
+        alt="<%= campground.name %>"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <p class="text-muted"><%= campground.location %></p>
+        <h2><%= campground.name %></h2>
+        <p class="card-text"><%= campground.description %></p>
+        <span class="d-block fw-bold"
+          >&dollar;<%= campground.price %>/ Night</span
+        >
+        <a class="btn btn-primary" href="campgrounds/<%= campground._id %>"
+          >View Campground</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<% }) %> <% } %>
