@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const app = express()
 const PORT = 3000
 const path = require('path')
+const { campgroundSchema } = require('./schemas.js')
 const Campground = require('./models/campground')
 const methodOverride = require('method-override')
 const ejsMate = require('ejs-mate')
@@ -27,6 +28,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist/')))
 app.use(express.static(path.join(__dirname, 'public')))
 
+const validateCampground = (req, res, next) => {
+  const { error } = campgroundSchema.validate(req.body)
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(',')
+    throw new ExpressError(msg, 400)
+  } else {
+    next()
+  }
+}
+
 app.get('/', (req, res) => {
   res.render('index')
 })
@@ -44,15 +55,6 @@ app.get('/campgrounds/new', (req, res) => {
 })
 
 app.get(
-  '/campgrounds/:id',
-  catchAsync(async (req, res) => {
-    const { id } = req.params
-    const campground = await Campground.findById(id)
-    res.render('campgrounds/details', { campground })
-  })
-)
-
-app.get(
   '/campgrounds/:id/edit',
   catchAsync(async (req, res) => {
     const { id } = req.params
@@ -61,8 +63,18 @@ app.get(
   })
 )
 
+app.get(
+  '/campgrounds/:id',
+  catchAsync(async (req, res) => {
+    const { id } = req.params
+    const campground = await Campground.findById(id)
+    res.render('campgrounds/details', { campground })
+  })
+)
+
 app.put(
   '/campgrounds/:id',
+  validateCampground,
   catchAsync(async (req, res) => {
     const campground = await Campground.findByIdAndUpdate(req.params.id, {
       ...req.body.campground,
@@ -73,9 +85,8 @@ app.put(
 
 app.post(
   '/campgrounds',
+  validateCampground,
   catchAsync(async (req, res, next) => {
-    if (!req.body.campground)
-      throw new ExpressError('Invalid Campground Data', 400)
     const newCampground = new Campground(req.body.campground)
     await newCampground.save()
     res.redirect(`/campgrounds/${newCampground._id}`)
